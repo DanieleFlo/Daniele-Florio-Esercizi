@@ -24,7 +24,7 @@ class  Elettronica(Prodotto):
     
     _materiali = ['ferro', 'legnome', 'plastica']
     def __init__(self, nome, costo_produzione, prezzo_vendita):
-        Prodotto.__init__(nome, costo_produzione, prezzo_vendita)
+        Prodotto.__init__(self, nome, costo_produzione, prezzo_vendita)
         
     def set_materiale(self, materiale):
         if materiale in self._materiali:
@@ -51,7 +51,7 @@ class  Abbigliamento(Prodotto):
     _taglie = ['S','M','L']
     _materiali = ['lino', 'seta', 'velluto']
     def __init__(self, nome, costo_produzione, prezzo_vendita):
-        Prodotto.__init__(nome, costo_produzione, prezzo_vendita)
+        Prodotto.__init__(self, nome, costo_produzione, prezzo_vendita)
         
     def set_taglia(self, taglia):
         if taglia in self._taglie:
@@ -111,10 +111,10 @@ class Fabbrica():
         print("Inventario:")
         for prodotto, info in self.inventario.items():
             print(f"Nome: {prodotto}")
-            print(f"Costo di produzione: {info['Costo di produzione']}")
-            print(f"Prezzo vendita: {info['Prezzo vendita']} ")
-            print(f"Profitto: {info['Profitto']} €")
             print(f"Quantità: {info['qty']}")
+            print(f"Costo di produzione: {info['Costo di produzione']}€ x {info['qty']} = {info['Costo di produzione']*info['qty']}€")
+            print(f"Prezzo vendita: {info['Prezzo vendita']}€ x {info['qty']} = {info['Prezzo vendita']*info['qty']}€")
+            print(f"Profitto: {info['Profitto']}€ x {info['qty']} = {info['Profitto']*info['qty']}€")
         print("---\n")
     
     
@@ -126,3 +126,14 @@ fabbrica.aggiungi_prodotto('maccaroni', 5, 10)
 fabbrica.vendi_prodotto('pasta')
 fabbrica.vendi_prodotto('maccaroni')
 fabbrica.resi_prodotto('pasta')
+
+# Test nuuove classi
+elettronica = Elettronica('ventilatore', 10, 30)
+elettronica.set_materiale('ferro')
+elettronica.set_garanzia(2)
+elettronica.calcola_profitto()
+print("---")
+maglia = Abbigliamento('Maglia', 4, 30)
+maglia.set_taglia('M')
+maglia.set_materiale('seta')
+maglia.calcola_profitto()
