@@ -6,7 +6,7 @@ class Ristorante():
         "Pizza Alfredo": 15,
         "Pizza Mario": 20,
         "Pizza Pepperoni": 25,
-        "Pizza Hawai (True pizza)": 25,
+        "Pizza Hawaii": 25,
     }
     def __init__(self, nome, tipo_cucina):
         self.nome = nome
@@ -20,11 +20,11 @@ class Ristorante():
         
     def apri_ristorante(self):
         self.aperto = True
-        print(f"Il ristorante {self.nome} è ora aperto, potete ordinare delle pizze orribili")
+        print(f"Il ristorante {self.nome} è ora aperto")
     
     def chiudi_ristorante(self):
         self.aperto = False
-        print(f"Il ristorante {self.nome} è chiuso, non potete ordinare delle pizze orribili")
+        print(f"Il ristorante {self.nome} è chiuso")
     
     def aggiungi_menu(self):
         print('\nAggiungi nuovo piatto al menu:')
@@ -51,10 +51,10 @@ class Ristorante():
         
     def stampa_menu(self):
         for el in self.menu:
-            print(f'{el}: {self.menu[el]}')
+            print(f'{el}; prezzo: {self.menu[el]}')
             
             
-ristorante = Ristorante('Ristorante Orribile', 'Italiana')
+ristorante = Ristorante('Da Mario', 'Italiana')
 
 ristorante.descrivi_ristorante()
 ristorante.stato_apertura()
