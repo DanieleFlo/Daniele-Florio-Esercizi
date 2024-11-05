@@ -38,7 +38,7 @@ class ContoBancario():
     
     @__control_titolare
     def get_titolare(self):
-        print(f'Nome titolare: {self.__titolare}')
+        print(f'Nome titolare: {self.__titolare}.')
 
 
 conto = ContoBancario()
