@@ -79,4 +79,5 @@ conto.valid_pin('123')
 conto.valid_pin('1234')
 
 #Verifico che non si possa utilizzare
-conto.__control_pin('123')
+print(conto._ContoBancario__control_pin('123'))
+

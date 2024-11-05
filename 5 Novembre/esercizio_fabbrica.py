@@ -19,17 +19,59 @@ class Prodotto():
         }
         
 class  Elettronica(Prodotto):
-    def __init__(self, nome, costo_produzione, prezzo_vendita, potenza, materiale, garanzia):
+    __materiale = ''
+    __garanzia = 0
+    
+    _materiali = ['ferro', 'legnome', 'plastica']
+    def __init__(self, nome, costo_produzione, prezzo_vendita):
         Prodotto.__init__(nome, costo_produzione, prezzo_vendita)
-        self.potenza = potenza
-        self.materiale = materiale
-        self.garanzia = garanzia
+        
+    def set_materiale(self, materiale):
+        if materiale in self._materiali:
+            self.__materiale = materiale
+            self.get_materiale()
+        else:
+            print(f"Il materiale non è valido. Utilizzare uno dei seguenti: {', '.join(self._materiali)}")
+    
+    def get_materiale(self):
+        print(f"Il materiale del prodotto {self.nome} è {self.__materiale}")
+    
+    def set_garanzia(self, garanzia):
+        if garanzia>0 and garanzia<40:
+            self.__garanzia = garanzia
+            self.get_garanzia()
+    
+    def get_garanzia(self):
+        print(f"La garanzia del prodotto {self.nome} è di {self.__garanzia} anni")
+        
         
 class  Abbigliamento(Prodotto):
-    def __init__(self, nome, costo_produzione, prezzo_vendita, taglia, materiale):
+    __taglia = ''
+    __materiale = ''
+    _taglie = ['S','M','L']
+    _materiali = ['lino', 'seta', 'velluto']
+    def __init__(self, nome, costo_produzione, prezzo_vendita):
         Prodotto.__init__(nome, costo_produzione, prezzo_vendita)
-        self.taglia = taglia
-        self.materiale = materiale
+        
+    def set_taglia(self, taglia):
+        if taglia in self._taglie:
+            self.__taglia = taglia
+            self.get_taglia()
+        else:
+            print(f"La taglia non è valida. Utilizzare una delle seguenti: {', '.join(self._taglie)}")
+            
+    def get_taglia(self):
+        print(f"La taglia del prodotto {self.nome} è {self.__taglia}")
+    
+    def set_materiale(self, materiale):
+        if materiale in self._materiali:
+            self.__materiale = materiale
+            self.get_materiale()
+        else:
+            print(f"Il materiale non è valido. Utilizzare uno dei seguenti: {', '.join(self._materiali)}")
+    
+    def get_materiale(self):
+        print(f"Il materiale del prodotto {self.nome} è {self.__materiale}")
 
 
 class Fabbrica():
