@@ -134,31 +134,35 @@ class Fabbrica():
     
 fabbrica = Fabbrica()
 
-fabbrica.aggiungi_prodotto('pasta', 5, 10)
-fabbrica.aggiungi_prodotto('pasta', 5, 10)
-fabbrica.aggiungi_prodotto('maccaroni', 5, 10)
-fabbrica.vendi_prodotto('pasta')
-fabbrica.vendi_prodotto('maccaroni')
-fabbrica.resi_prodotto('pasta')
+# fabbrica.aggiungi_prodotto('pasta', 5, 10)
+# fabbrica.aggiungi_prodotto('pasta', 5, 10)
+# fabbrica.aggiungi_prodotto('maccaroni', 5, 10)
+# fabbrica.vendi_prodotto('pasta')
+# fabbrica.vendi_prodotto('maccaroni')
+# fabbrica.resi_prodotto('pasta')
 
 # Test nuuove classi
 elettronica = Elettronica('ventilatore', 10, 30)
 elettronica.set_materiale('ferro')
 elettronica.set_garanzia(2)
-elettronica.calcola_profitto()
-print("---")
+# elettronica.calcola_profitto()
+# print("---")
 maglia = Abbigliamento('Maglia', 4, 30)
 maglia.set_taglia('M')
 maglia.set_materiale('seta')
-maglia.calcola_profitto()
+# maglia.calcola_profitto()
 print("\n*******----------------*******\n")
 
 # funzione polimorfica
+prodotto_base = Prodotto("Esempio", 2, 5)
 def polimorfica(fnp):
+    print(f"Risultato funzione polimorfica")
     data = fnp.show_info()
     for key, info in data.items():
         print(f"{key}: {info}")
-    print('\n')
+    print('')
 
+# Test funzione polimorfica
+polimorfica(prodotto_base)
 polimorfica(elettronica)
 polimorfica(maglia)
