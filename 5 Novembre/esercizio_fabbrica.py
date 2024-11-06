@@ -90,16 +90,21 @@ class  Abbigliamento(Prodotto):
 
 class Fabbrica():
     inventario = {}
-    def aggiungi_prodotto(self, nome, costo_produzione, prezzo_vendita):
-        prodotto = Prodotto(nome, costo_produzione, prezzo_vendita)
     
+    def aggiungi_prodotto(self, nome, costo_produzione, prezzo_vendita):
+        nav = input("Scegli il tipo di prodotto: 1 elettronica, 2 abbiliamento: ")
+        if nav == '1':
+            prodotto = Elettronica(nome, costo_produzione, prezzo_vendita)
+        elif nav == '2':
+            prodotto = Abbigliamento(nome, costo_produzione, prezzo_vendita)
+        
         if nome in self.inventario.keys():
             self.inventario[nome]['qty'] += 1
         else:
             self.inventario[nome] = prodotto.show_info()
             self.inventario[nome].setdefault('qty', 1)
         print(f"Il prodotto {nome} è stato aggiunto all'invetario")
-        
+            
         self.stampa_inventario()
     
     def vendi_prodotto(self, nome):
@@ -154,7 +159,7 @@ maglia.set_materiale('seta')
 print("\n*******----------------*******\n")
 
 # funzione polimorfica
-prodotto_base = Prodotto("Esempio", 2, 5)
+prodotto_base = Prodotto("Cappello di Trump", 300, 0)
 def polimorfica(fnp):
     print(f"Risultato funzione polimorfica")
     data = fnp.show_info()
