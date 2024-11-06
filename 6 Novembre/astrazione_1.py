@@ -184,4 +184,4 @@ parco1.mostra_veicoli()
 
 print("Sto vendendo la mia Panda")
 parco1.rimuovi(auto1)
-parco1.mostra_veicoli() 
+parco1.mostra_veicoli()
