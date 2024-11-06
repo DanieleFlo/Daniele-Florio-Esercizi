@@ -40,7 +40,7 @@ class BonificoBancario(MeodoPagamento):
 
 
 # Gestore dei pagamenti che utilizza le istanze
-class MeodoPagamento():
+class GestionePagamento():
     def __init__(self):
         pass
     
@@ -83,6 +83,6 @@ class MeodoPagamento():
                         print("Attenzione! Inserire un numero.\n")
                         
             
-pagamento = MeodoPagamento()
+pagamento = GestionePagamento()
 
 pagamento.paga()
