@@ -44,6 +44,13 @@ class  Elettronica(Prodotto):
     def get_garanzia(self):
         print(f"La garanzia del prodotto {self.nome} è di {self.__garanzia} anni")
         
+    def show_info(self):
+        old_info = super().show_info()
+        new_info = old_info.copy()
+        new_info['materiale'] = self.__materiale
+        new_info['garanzia'] = self.__garanzia
+        return new_info
+        
         
 class  Abbigliamento(Prodotto):
     __taglia = ''
@@ -72,6 +79,13 @@ class  Abbigliamento(Prodotto):
     
     def get_materiale(self):
         print(f"Il materiale del prodotto {self.nome} è {self.__materiale}")
+        
+    def show_info(self):
+        old_info = super().show_info()
+        new_info = old_info.copy()
+        new_info['materiale'] = self.__materiale
+        new_info['taglia'] = self.__taglia
+        return new_info
 
 
 class Fabbrica():
@@ -137,3 +151,14 @@ maglia = Abbigliamento('Maglia', 4, 30)
 maglia.set_taglia('M')
 maglia.set_materiale('seta')
 maglia.calcola_profitto()
+print("\n*******----------------*******\n")
+
+# funzione polimorfica
+def polimorfica(fnp):
+    data = fnp.show_info()
+    for key, info in data.items():
+        print(f"{key}: {info}")
+    print('\n')
+
+polimorfica(elettronica)
+polimorfica(maglia)
