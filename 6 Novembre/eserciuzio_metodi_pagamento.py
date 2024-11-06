@@ -41,17 +41,22 @@ class BonificoBancario(MeodoPagamento):
 
 # Gestore dei pagamenti che utilizza le istanze
 class GestionePagamento():
+    __saldo = 0
+    
     def __init__(self):
         pass
     
+    # Metodo privado che gestisce il pagamento
     def __effettua_pagamento(self, tipo_pagamento, importo):
         # print((isinstance(tipo_pagamento, CartaDiCredito) or isinstance(tipo_pagamento, PayPal) or isinstance(tipo_pagamento, BonificoBancario)))
-        if isinstance(importo, float) and importo>0:
-            msg = tipo_pagamento().effettua_pagamento(importo)
+        if isinstance(importo, float) and importo>0 :
+            msg = tipo_pagamento.effettua_pagamento(importo)
             return msg
         else: "Errore durante il pagamento, importo non valido!"
-        
+    
+    # Metodo che permette di pagare
     def paga(self):
+        #Menu
         while True:
             print("\nMetodi di pagamento:")
             print("1. Carta di Credito")
@@ -68,21 +73,37 @@ class GestionePagamento():
             elif scelta in ['1', '2', '3']:
                 while True:
                     temp_importo = input("Inserisci l'importo da pagare: ")
-                    if temp_importo.isdigit():
+                    if temp_importo.isdigit(): # Controlla che ho inserito un numero
                         importo = float(temp_importo)
                         
                         if scelta == '1':
-                            print(self.__effettua_pagamento(CartaDiCredito, importo))
+                            print(self.__effettua_pagamento(CartaDiCredito(), importo)) # Utilizza il metodo privato per effettuare il pagamento
                         elif scelta == '2':
-                            print(self.__effettua_pagamento(PayPal, importo))
+                            print(self.__effettua_pagamento(PayPal(), importo))
                         elif scelta == '3':
-                            print(self.__effettua_pagamento(BonificoBancario, importo))
+                            print(self.__effettua_pagamento(BonificoBancario(), importo))
                         
                         break #Esci
                     else:
                         print("Attenzione! Inserire un numero.\n")
                         
+    def set_saldo(self):
+        while True:
+            temp_saldo = input("Deposita nel saldo saldo: ")
+            if temp_saldo.isdigit(): # Controlla che ho inserito un numero
+                self.__saldo += float(temp_saldo)
+                self.get_saldo()
+                break
+            else:
+                print("Attenzione! Inserire un numero.\n")
+    
+    def get_saldo(self):
+        print(f"Saldo: {self.__saldo}")
+                        
             
 pagamento = GestionePagamento()
 
+pagamento.set_saldo()
 pagamento.paga()
+
+
