@@ -17,7 +17,6 @@ class Posto():
     def  get_fila(self):
         pass
     
-    pass
 
 class PostoVIP(Posto):
     def __init__(self):
