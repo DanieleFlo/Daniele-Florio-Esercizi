@@ -52,10 +52,12 @@ class PersonaleCucina():
 class Chef(PersonaleCucina):
     def __init__(self, nome, eta):
         super().__init__(nome, eta)
-        self.menu = []
-        
+        self._menu = []
         # Attributi aggiuntivi come specialità (tipo di cucina in cui è specializzato)
         self._tipo_cucina = ''
+    
+    def get_menu(self):
+        return self._menu
     
     # dettaglia come lo chef crea nuovi piatti e menu
     def prepara_menu(self):
@@ -73,7 +75,7 @@ class Chef(PersonaleCucina):
             "nome": "pizza Hawaii",
             "ingredienti": ["Ananas", "farina", "pancetta"]
         },]
-        return self.menu
+        return self.get_menu()
 
 
 class SousChef(PersonaleCucina):
@@ -95,8 +97,6 @@ class SousChef(PersonaleCucina):
 class CuocoLinea(PersonaleCucina):
     def __init__(self, nome, eta):
         super().__init__(nome, eta)
-    
-    
     
     # specifica la preparazione di un piatto specifico nella linea di produzione
     def cucina_paitto(self, nome_piatto):
@@ -131,24 +131,27 @@ class Ristorante():
     _ordinazioni =[]
     _clienti = []
     _chef = Chef('Luigi', 41)
-    _sous_chef = SousChef('Mario', 35),
-    _personale= [CuocoLinea('Pippo', 21)]
+    _sous_chef = SousChef('Mario', 35)
+    _personale= [_chef,_sous_chef, CuocoLinea('Pippo', 21)]
+    
     def __init__(self, nome):
           self._nome_ristorante = nome
           self._menu = self._chef.prepara_menu()
           
     def assegna_piatto(self):
-        index = 0
-        if self._chef.get_piatto() == False:
-            self._chef.set_piatto(self.menu[index])
-            index +=1
-            
-        if self._sous_chef.get_piatto() == False:
-            self._sous_chef.set_piatto(self.menu[index])
+        for i, persona in enumerate(self._personale):
+            if persona.get_piatto() == False:
+                if i<len(self._menu):
+                    print(f'{persona.get_nome()} si è assegna il piatto: {self._menu[i]['nome']}')
+                    persona.set_piatto(self._menu[i])
+                    
+                else: 
+                    print('Piatti finiti!\n')
     
     def get_menu(self):
+        print('\nEcco il menu:')
         for piatto in self._menu:
-            print(f"{piatto['nome']}")
+            print(f"Piatto: {piatto['nome']}")
             print(f"Ingredienti: {', '.join(piatto['ingredienti'])}")
         print()
         
@@ -187,6 +190,7 @@ class Ristorante():
 
 
     def start(self):
+        self.assegna_piatto()
         while True:
             nav  = self.__input('', ['1','2'], 'Nuovo cliente: 1, Lista clienti: 2,  esci: 3')
             if nav == '1':
@@ -197,6 +201,12 @@ class Ristorante():
                 self.get_client()
             elif nav == '3':
                 break
+    
+    def __assegna_ordine(self, piatto):
+        for persona in self._personale:
+            if persona.get_occupato() == False and persona.get_piatto()['nome']==piatto:
+                print(f'Lo chef {persona.get_nome()} cucina il piatto: {piatto}')
+                persona.set_occupato(True)
             
     def gestione_cliente(self):
         while True:
@@ -206,6 +216,7 @@ class Ristorante():
             elif nav_cliente == '2':
                 ordine = self.__input('', [piatto['nome'] for piatto in self._menu ], 'Qaule piatto vuoi ordinare?')
                 self._ordinazioni.append(ordine)
+                self.__assegna_ordine(ordine)
                 break
 
 ristorante = Ristorante('Da Luigi')
