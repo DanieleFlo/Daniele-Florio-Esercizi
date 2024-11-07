@@ -73,9 +73,39 @@ class CuocoLinea(PersonaleCucina):
     # specifica la preparazione di un piatto specifico nella linea di produzione
     def cucina_paitto(self, nome_piatto):
         pass
-    
 
-class Gestione():
+
+"""
+Crea una classe ristorante con una lista di liste chiamata menu e una 
+lista chiamata ordinazione, Nel menu ci devono essere X piatti composti 
+ogniuno da una lista propria di ingredienti, e la lista ordinazione invece e 
+composta dalle singole ordinazioni del cleinte, Servirrà quindi una classe cliente e 
+ogni membro della cucina potrà servire solo X piatti
+
+Exstra:
+- Aggiunggi personale
+- Budget (random 10-100) e costi
+- FeedBack
+"""
+
+class Ristorante():
+    _menu = [
+        {
+            "nome": "pasta Alfredo",
+            "ingredienti": ["fettuccine", "pancetta", "formaggio", "broccoli"]
+        },
+        {
+            "nome": "pizza Pepperoni",
+            "ingredienti": ["salane", "farina", "sugo"]
+        },
+        {
+            "nome": "carbonara cheese",
+            "ingredienti": ["uova", "panna", "pasta"]
+        },
+        {
+            "nome": "pizza Hawaii",
+            "ingredienti": ["Ananas", "farina", "pancetta"]
+        },]
     def __init__(self):
         pass
     
@@ -96,8 +126,8 @@ class Gestione():
             else:
                 print('tipo di input non valido')
                 break
-            
-    
+
+
     def start(self):
         while True:
             pass
