@@ -50,4 +50,4 @@ muratore.impasta_cemento()
 
 muratore = Fabbro('Massimo', 'Delle Bicocche', 1972)
 muratore.presentati()
-muratore.piega_ferro()
+muratore.piega_ferro() 
