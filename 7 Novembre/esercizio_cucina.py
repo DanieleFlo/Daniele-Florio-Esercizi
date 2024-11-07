@@ -23,31 +23,57 @@ Metodi come cucina_piatto(nome_piatto) che specifica la preparazione di un piatt
 
 class PersonaleCucina():
     _lista_ingredienti = []
-    def __init__(self, nome, eta):
+    def __init__(self, nome, eta, piatto=False, occupato=False):
         self._nome = nome
         self._eta = eta
+        self._occupato = occupato
+        self._piatto = piatto
     
     # metodo generico che può essere sovrascritto per specificare il tipo di lavoro svolto
     def lavora(self):
         pass
+    
+    def get_occupato(self):
+        return self._occupato
+    
+    def get_nome(self):
+        return self._nome
+    
+    def get_piatto(self):
+        return self._piatto
+    
+    def set_piatto(self, piatto):
+        self._piatto = piatto
+    
+    def set_occupato(self, occupato):
+        self._occupato = occupato
 
 
 class Chef(PersonaleCucina):
     def __init__(self, nome, eta):
         super().__init__(nome, eta)
+        self.menu = []
         
         # Attributi aggiuntivi come specialità (tipo di cucina in cui è specializzato)
         self._tipo_cucina = ''
     
-    def set_tipo_cucina(self, tipo_cucina):
-        self._tipo_cucina = tipo_cucina
-        
-    def get_tipo_cucina(self):
-        return self._tipo_cucina
-    
     # dettaglia come lo chef crea nuovi piatti e menu
     def prepara_menu(self):
-        pass
+        print(f"Lo chef { self.get_nome()} ha preparato il menu!")
+        self._menu = [
+        {
+            "nome": "pasta Alfredo",
+            "ingredienti": ["fettuccine", "pancetta", "formaggio", "broccoli"]
+        },
+        {
+            "nome": "carbonara cheese",
+            "ingredienti": ["uova", "panna", "pasta"]
+        },
+        {
+            "nome": "pizza Hawaii",
+            "ingredienti": ["Ananas", "farina", "pancetta"]
+        },]
+        return self.menu
 
 
 class SousChef(PersonaleCucina):
@@ -70,6 +96,8 @@ class CuocoLinea(PersonaleCucina):
     def __init__(self, nome, eta):
         super().__init__(nome, eta)
     
+    
+    
     # specifica la preparazione di un piatto specifico nella linea di produzione
     def cucina_paitto(self, nome_piatto):
         pass
@@ -88,39 +116,69 @@ Exstra:
 - FeedBack
 """
 
+class Cliente():
+    _budget = 0
+    _feedback = ''
+    def __init__(self, nome):
+        self._nome = nome
+        
+    def get_nome(self):
+        return self._nome
+
 class Ristorante():
-    _menu = [
-        {
-            "nome": "pasta Alfredo",
-            "ingredienti": ["fettuccine", "pancetta", "formaggio", "broccoli"]
-        },
-        {
-            "nome": "pizza Pepperoni",
-            "ingredienti": ["salane", "farina", "sugo"]
-        },
-        {
-            "nome": "carbonara cheese",
-            "ingredienti": ["uova", "panna", "pasta"]
-        },
-        {
-            "nome": "pizza Hawaii",
-            "ingredienti": ["Ananas", "farina", "pancetta"]
-        },]
-    def __init__(self):
-        pass
     
-    def __input(self, tipo_input, msg='', msg_error=''):
+    
+    _ordinazioni =[]
+    _clienti = []
+    _chef = Chef('Luigi', 41)
+    _sous_chef = SousChef('Mario', 35),
+    _personale= [CuocoLinea('Pippo', 21)]
+    def __init__(self, nome):
+          self._nome_ristorante = nome
+          self._menu = self._chef.prepara_menu()
+          
+    def assegna_piatto(self):
+        index = 0
+        if self._chef.get_piatto() == False:
+            self._chef.set_piatto(self.menu[index])
+            index +=1
+            
+        if self._sous_chef.get_piatto() == False:
+            self._sous_chef.set_piatto(self.menu[index])
+    
+    def get_menu(self):
+        for piatto in self._menu:
+            print(f"{piatto['nome']}")
+            print(f"Ingredienti: {', '.join(piatto['ingredienti'])}")
+        print()
+        
+    def get_client(self):
+        if len(self._clienti):
+            for cliente in self._clienti:
+                print(f"{cliente.get_nome()}", end=', ')
+            print()
+        else:
+            print('Nessun cliente!\n')
+    
+    def __input(self, tipo_input, opzioni, msg='', msg_error='Scelta non valida!'):
         while True:
             if isinstance(tipo_input, int):
                 val = input(msg +': ')
                 if val.isdigit():
-                    return int(val)
+                    new_val = int(val)
+                    if opzioni==False or new_val in opzioni:
+                        return new_val
+                    else:
+                        print(msg_error)
                 else:
                     print(msg_error)
-            elif isinstance(tipo_input,  str):
+            elif isinstance(tipo_input, str):
                 val = input(msg +': ')
                 if val!= '':
-                    return val
+                    if opzioni==False or val in opzioni:
+                        return val
+                    else:
+                        print(msg_error)
                 else:
                     print(msg_error)
             else:
@@ -130,4 +188,26 @@ class Ristorante():
 
     def start(self):
         while True:
-            pass
+            nav  = self.__input('', ['1','2'], 'Nuovo cliente: 1, Lista clienti: 2,  esci: 3')
+            if nav == '1':
+                nome_cliente = self.__input('', False, 'Nome cliente')
+                self._clienti.append(Cliente(nome_cliente))
+                self.gestione_cliente()
+            elif nav == '2':
+                self.get_client()
+            elif nav == '3':
+                break
+            
+    def gestione_cliente(self):
+        while True:
+            nav_cliente = self.__input('', ['1','2'], 'Chiedi menu: 1, ordina: 2')
+            if nav_cliente == '1':
+                self.get_menu()
+            elif nav_cliente == '2':
+                ordine = self.__input('', [piatto['nome'] for piatto in self._menu ], 'Qaule piatto vuoi ordinare?')
+                self._ordinazioni.append(ordine)
+                break
+
+ristorante = Ristorante('Da Luigi')
+
+ristorante.start()
