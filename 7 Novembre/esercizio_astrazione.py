@@ -48,6 +48,6 @@ muratore = Muratore('Luigi', 'Delle Bicocche', 1972)
 muratore.presentati()
 muratore.impasta_cemento()
 
-muratore = Fabbro('Massimo', 'Delle Bicocche', 1972)
+muratore = Fabbro('Massimo', 'Delle Bicocche', 1973)
 muratore.presentati()
 muratore.piega_ferro() 
