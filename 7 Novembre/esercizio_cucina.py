@@ -163,7 +163,7 @@ class Ristorante():
         else:
             print('Nessun cliente!\n')
     
-    def __input(self, tipo_input, opzioni, msg='', msg_error='Scelta non valida!'):
+    def __input(self, tipo_input, opzioni, msg, msg_error='Scelta non valida!'):
         while True:
             if isinstance(tipo_input, int):
                 val = input(msg +': ')
