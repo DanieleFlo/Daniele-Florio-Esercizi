@@ -30,7 +30,7 @@ print(esempio_array.dtype)
 boh = Boh(esempio_array)
 esempio_array = boh.trasfroma_to_float()
 print(esempio_array.dtype)
-print(esempio_array)
+print(esempio_array.shape)
 
 # esempio_array = 
 # print(esempio_array.dtype)
