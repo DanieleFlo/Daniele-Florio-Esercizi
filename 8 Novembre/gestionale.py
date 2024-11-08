@@ -82,7 +82,7 @@ class Users():
                 if self.__check_password(password, user.get_password()):
                     return True, user
             
-        return False 
+        return False,
     
     # Aggiunge l'untete al dizionario
     def __add_user(self, username, password):
@@ -198,6 +198,8 @@ def game():
                         play_level(int(chosen_level), user)
                     else:
                         print("Livello non valido o non sbloccato.")
+            else:
+                print("Nome utente o password non validi.")
         elif action.lower() == 'esci':
             print("Uscita dal gioco. Grazie per aver giocato!")
             lista = gestore_utenti.get_users_ord_score()
