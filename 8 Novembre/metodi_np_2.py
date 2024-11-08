@@ -14,3 +14,9 @@ print(arr_3D[1: ,1:3])
 
 prova = np.linspace(0, 5, 11)
 print(prova.shape, prova)
+
+prova2 = np.full((2,2), 11)
+print(prova2)
+prova2 = np.all(prova)
+
+print(prova2)
