@@ -24,6 +24,10 @@ class Boh():
     def trasfroma_to_float(self):
         return self._esempio_array.astype(np.float64)
     
+    @staticmethod
+    def static_trasfroma_to_float(arr):
+        return arr.astype(np.float64)
+    
 
 esempio_array = np.arange(10, 50)
 print(esempio_array.dtype)
@@ -31,6 +35,9 @@ boh = Boh(esempio_array)
 esempio_array = boh.trasfroma_to_float()
 print(esempio_array.dtype)
 print(esempio_array.shape)
+
+esempio_array2 = np.arange(10, 50)
+print(Boh.static_trasfroma_to_float(esempio_array2).dtype)
 
 # esempio_array = 
 # print(esempio_array.dtype)
