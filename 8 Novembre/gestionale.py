@@ -12,6 +12,18 @@
 #
 
 
+def io_classifica(stringa):
+    file1 = open("classifica.txt", "w", encoding = "utf-8")
+
+    # Writing multiple strings
+    # at a time
+    file1.writelines(stringa)
+
+    # Closing file
+    file1.close()
+
+
+
 class User():
     def __init__(self, username, password, score=0):
         self.__username = username
@@ -60,7 +72,7 @@ class Users():
     
     # Login, controlla l'input e la password dell'utente ed ritorna True, l'utente in caso di affermativo, altrimenti False
     def login(self):
-        username = input('Usernname: ')
+        username = input('Username: ')
         password = input('Password: ')
         res_name = self.__input(username)
         res_pass = self.__input(password)
@@ -79,7 +91,7 @@ class Users():
     
     # Registrazione, controlla l'input e la password dell'utente ed aggiunge l'utente al dizionario se validi, altrimenti False
     def register(self):
-        username = input('Usernname: ')
+        username = input('Username: ')
         password = input('Password: ')
         res_name = self.__input(username)
         res_pass = self.__input(password)
@@ -102,10 +114,12 @@ class Users():
     def __deconstructor(self, dizionario):
         stringa = []
         for key, elemento in dizionario:
-            parziale = f"Giocatore: {key}punteggio: {elemento}"
+            parziale = f"Giocatore: {key} punteggio: {elemento} \n"
             stringa.append(parziale)
             
         return stringa
+
+    
 
     
     
@@ -186,7 +200,15 @@ def game():
                         print("Livello non valido o non sbloccato.")
         elif action.lower() == 'esci':
             print("Uscita dal gioco. Grazie per aver giocato!")
-            break
+            lista = gestore_utenti.get_users_ord_score()
+            output_string = ""
+            for stringa in lista:
+                output_string += stringa
+            print(output_string)
+            io_classifica(output_string)
+
+
+
         else:
             print("Comando non riconosciuto.")
 
