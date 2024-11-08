@@ -25,7 +25,7 @@ class Boh():
         return self._esempio_array.astype(np.float64)
     
 
-esempio_array = np.arange(10, 49)
+esempio_array = np.arange(10, 50)
 print(esempio_array.dtype)
 boh = Boh(esempio_array)
 esempio_array = boh.trasfroma_to_float()
