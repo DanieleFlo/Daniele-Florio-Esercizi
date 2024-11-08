@@ -39,7 +39,7 @@ class SlicingAndIndexing():
     def mod_index(self, start, stop, value):
         print(f"Mod {start} {stop} con {value}")
         temp = np.arange(start, stop-1)
-        self._array[temp] = 99
+        self._array[temp] = value
         print(self._array)
     
     def get_arr_bod(self):
