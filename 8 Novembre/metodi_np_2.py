@@ -11,3 +11,6 @@ print()
 print(arr_3D[: ,1:3])
 print()
 print(arr_3D[1: ,1:3])
+
+prova = np.linspace(0, 5, 11)
+print(prova.shape, prova)
