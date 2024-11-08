@@ -53,16 +53,76 @@ class SlicingAndIndexing():
         
 
 es = SlicingAndIndexing()
-es.create_array(10,50,20)
-print()
-es.estrai_primi(10)
-print()
-es.estrai_ultimi(5)
-print()
-es.estrai_index(5,15)
-print()
-es.estrai_el(3)
-print()
-es.mod_index(5,10, 99)
-print()
-es.stampa()
+class Gestione():
+    def __init__(self):
+        pass
+    @staticmethod
+    def input(msg, opzioni=False, msg_error='Scelta non valida!'):
+        if opzioni!=False and isinstance(opzioni[0], int):
+            val = input(msg +': ')
+            if val.isdigit():
+                new_val = int(val)
+                if opzioni==False or new_val in opzioni:
+                    return new_val
+                else:
+                    print(msg_error)
+            else:
+                print(msg_error)
+        elif opzioni==False or isinstance(opzioni[0], str):
+            val = input(msg +': ')
+            if val!= '':
+                if opzioni==False or val in opzioni:
+                    return val
+                else:
+                    print(msg_error)
+            else:
+                print(msg_error)
+        else:
+            print('tipo di input non valido')
+        return None
+                
+
+while True:
+    print("\n--Menu--")
+    print("1. Crea array")
+    print("2. Estrai i primi n")
+    print("3. Estrai gli ultimi n")
+    print("4. Estrai da un indice a un altro")
+    print("5. Estrai da una posizione")
+    print("6. Modifica da un indice a un altro con valore")
+    print("7. Stampa array modificati")
+    print("8. Esci")
+    scelta = Gestione.input('->', ['1', '2', '3', '4', '5', '6', '7', '8'])
+    if scelta=='1':
+        start = int(input('start: '))
+        end = int(input('end: '))
+        n = int(input('N: '))
+        print()
+        es.create_array(start,end,n)
+    elif scelta=='2':
+        n = int(input('N primi: '))
+        print()
+        es.estrai_primi(n)
+    elif scelta=='3':
+        n = int(input('N ultimi: '))
+        print()
+        es.estrai_ultimi(n)
+    elif scelta=='4':
+        start = int(input('start index: '))
+        end = int(input('end index: '))
+        print()
+        es.estrai_index(start, end)
+    elif scelta=='5':
+        n = int(input('Pos: '))
+        es.estrai_el(n)
+        print()
+    elif scelta=='6':
+        pass
+    elif scelta=='7':
+        start = int(input('start: '))
+        end = int(input('end: '))
+        n = int(input('Value: '))
+        print()
+        es.mod_index(start,end,n)
+    elif scelta=='8':
+        break
