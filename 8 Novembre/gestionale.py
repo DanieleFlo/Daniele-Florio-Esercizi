@@ -17,36 +17,81 @@ class User():
         self.__username = username
         self.__password = password
         self.__score = score
-    
+        
     def get_username(self):
-        pass
+        return self.__username
     
     def get_password(self):
-        pass
+        return self.__password
     
     def get_score(self):
         return self.__score
     
-    def set_score(self, new_score : int):
-        pass
+    def set_score(self, new_score : float):
+        if isinstance(new_score, float) and new_score>0:
+            self.__score = new_score
     
-    
+ 
 class Users():
-    __id = 0
-    def __init__(self, username, password, score=0):
-        super().__init__(username, password, score)
-        self.__users = []
     
-    def __check_password(self, password: str, users: list):
-        for user in users:
-            if self.__password == user["username"]:
-                pass
+    def __init__(self):
+        self.__users = {}
     
-    def login(self, username: str, password: str):
-        pass
+    # Verifica che l'input sia valido, 0<stringa<20
+    def __input(self, data: str):
+        if isinstance(data, str) and len(data)>0 and len(data)<20:
+            return True
+        else:
+            return False
     
-    def register(self, username: str, password: str):
-        pass
+    # Verifica che le password siano concordi
+    def __check_password(self, password: str, password_user:str):
+            if password_user == password:
+                return True
+            else:
+                return False
+    
+    # Verifica che l'utente esite
+    def __find_user(self, username):
+        for key in self.__users.keys():
+            if key == username:
+                return self.__users[username]
+        return None
+    
+    # Login, controlla l'input e la password dell'utente ed ritorna True, l'utente in caso di affermativo, altrimenti False
+    def login(self):
+        username = input('Usernname: ')
+        password = input('Password: ')
+        res_name = self.__input(username)
+        res_pass = self.__input(password)
+        if res_name == True and res_pass ==True:
+            user = self.__find_user(username)
+            if user!=None:
+                if self.__check_password(password, user.get_password()):
+                    return True, user
+            
+        return False 
+    
+    # Aggiunge l'untete al dizionario
+    def __add_user(self, username, password):
+        user = User(username, password)
+        self.__users[username] = user
+    
+    # Registrazione, controlla l'input e la password dell'utente ed aggiunge l'utente al dizionario se validi, altrimenti False
+    def register(self):
+        username = input('Usernname: ')
+        password = input('Password: ')
+        res_name = self.__input(username)
+        res_pass = self.__input(password)
+        if res_name == True and res_pass ==True:
+            user = self.__find_user(username)
+            if user==None:
+                self.__add_user(username, password)
+                return True
+        return False
     
     
-    
+users = Users()
+print(users.register())
+print(users.login())
+print(users.register())
