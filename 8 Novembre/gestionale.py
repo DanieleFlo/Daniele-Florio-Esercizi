@@ -90,20 +90,20 @@ class Users():
                 return True
         return False
     
-    def get_users_ord_score(self):
-        temp = {}
-        for key, user in self.__users.items():
-            temp[key] ={'score': user.get_score()}
-            self.__users[key].get_score()
-        temp = sorted(temp, key=lambda x: x['score'])
-        return self.__deconstructor()
+    # def get_users_ord_score(self):
+    #     temp = {}
+    #     for key, user in self.__users.items():
+    #         temp[key] ={'score': user.get_score()}
+    #         self.__users[key].get_score()
+    #     temp = sorted(temp, key=lambda x: x['score'])
+    #     return self.__deconstructor()
             
-    def __deconstructor(dizionario):
-        stringa = ""
-        for elemento in dizionario.values():
-            parziale = "Giocatore: " + elemento.get_username() + " punteggio: " + elemento.get_score()
-            stringa += parziale
-        return stringa
+    # def __deconstructor(dizionario):
+    #     stringa = ""
+    #     for elemento in dizionario.values():
+    #         parziale = "Giocatore: " + elemento.get_username() + " punteggio: " + elemento.get_score()
+    #         stringa += parziale
+    #     return stringa
 
     
     
