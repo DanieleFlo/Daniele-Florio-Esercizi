@@ -96,15 +96,15 @@ class Users():
             temp[key] = user.get_score()
             self.__users[key].get_score()
         temp = sorted(temp.items(), reverse=True)
-        print(temp)
         res = self.__deconstructor(temp)
         return res
             
     def __deconstructor(self, dizionario):
-        stringa = ""
+        stringa = []
         for key, elemento in dizionario:
-            parziale = f"Giocatore: {key }punteggio: {elemento}"
-            stringa += parziale
+            parziale = f"Giocatore: {key}punteggio: {elemento}"
+            stringa.append(parziale)
+            
         return stringa
 
     
