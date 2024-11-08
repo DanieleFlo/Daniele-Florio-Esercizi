@@ -9,7 +9,10 @@
 # 3 check ogni ora
 
 
-#
+# Gruppo:
+# Pierfrancesco
+# Pier Carlo
+# Daniele
 
 
 def io_classifica(stringa):
