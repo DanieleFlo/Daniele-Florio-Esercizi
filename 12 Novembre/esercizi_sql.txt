@@ -1,0 +1,55 @@
+//DESCRIBE customers; <- descrive la tabella
+
+ES 1:
+Scrivete una query SQL che restituisca solo i record dalla 
+tabella "products"con un prezzo superiore a 50
+
+SELECT buyPrice,productName 
+FROM `products` 
+WHERE buyPrice>50 
+ORDER BY buyPrice DESC;
+
+
+ES 2:
+Scrivete una query SQL che restituisca tutti i record dalla tabella 
+"orders"ordinati per data in ordine decrescente.
+
+SELECT * FROM `orders` ORDER By orderDate DESC;
+
+Es 3:
+Scrivete una query SQL che aggiorni il prezzo di tutti i 
+prodotti nella tabella"products" aumentandolo del 10%.
+
+UPDATE `products` SET buyPrice=buyPrice+buyPrice/10;
+
+
+Es 4:
+Scrivete una query SQL che inserisca un 
+nuovo utente nella tabella" customers".
+
+INSERT INTO customers 
+(customerNumber, customerName, contactLastName, contactFirstName, phone, addressLine1, city, postalCode, country) 
+VALUES (200,'Boh1','Boh2','Mario','555','Via tattia','Cosenza','Italia')
+
+Es 5:
+Scrivete una query SQL che elimini tutti gli ordini nella tabella "
+orders" con hanno lo stato "Cancelled".
+
+***
+
+Es 6:
+Scrivete una query SQL che restituisca tutti gli utenti 
+dalla tabella"customers" il cui nome inizia con la S e 
+vivono in California
+
+SELECT state,COUNT(state) FROM customers GROUP BY state;
+SELECT * FROM `customers` WHERE contactFirstName LIKE "s%" AND state = "CA";
+
+
+Es 7:
+Si vogliono recuperare dal database "world" la lingua e 
+la nazione di ogni città.
+
+SELECT countrylanguage.Language,country.Name FROM city
+INNER JOIN countrylanguage ON city.CountryCode = countrylanguage.CountryCode 
+INNER JOIN country ON country.Code = city.CountryCode;
