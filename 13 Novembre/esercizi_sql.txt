@@ -1,0 +1,89 @@
+Es: 1
+
+Si vuole recuperare il numero di città per nazione dal database 
+"world" mostrando anche il nome della nazione e ordinando 
+il risultato in base al numero di città.
+
+SELECT
+country.Name,
+city.CountryCode,
+COUNT(city.CountryCode) as res
+FROM city
+LEFT OUTER JOIN country ON country.Code = city.CountryCode
+GROUP BY city.CountryCode
+ORDER BY res
+
+
+Es: 2
+
+Si vuole conoscere la lista di repubbliche con aspettativa 
+di vita maggiore dei 70 anni.
+
+
+SELECT
+country.Code,
+country.LifeExpectancy,
+country.GovernmentForm,
+country.HeadOfState,
+Capital
+FROM country
+WHERE HeadOfState IN (
+    SELECT
+    HeadOfState
+    FROM `country` 
+    WHERE country.LifeExpectancy>70
+    AND 
+    country.GovernmentForm LIKE'%Republic%'
+)
+
+Es: 3
+
+Si vuole recuperare dal database WORLD le lingue parlate per nazione 
+con la rispettiva percentuale di utilizzo;
+create un vista sulla base di questa query
+
+
+SELECT
+country.Name,
+countrylanguage.Language,
+countrylanguage.Percentage
+FROM country
+INNER JOIN countrylanguage ON country.code=countrylanguage.CountryCode;
+
+CREATE VIEW view_test_CL AS
+SELECT 
+country.Name,
+countrylanguage.Language,
+countrylanguage.Percentage
+FROM country
+INNER JOIN countrylanguage ON country.code=countrylanguage.CountryCode;
+
+
+Es: 4
+
+Create una vista chiamata PopulationByContinent 
+che mostri il nome del continente e la 
+popolazione totale per ciascun continente.
+
+CREATE VIEW PopulationByContinent AS
+    SELECT
+    country.Continent,
+    SUM(DISTINCT country.Population)
+    FROM country
+    GROUP BY country.Continent;
+
+Es: 5
+
+Create una vista chiamata CapitalCities che mostri 
+il nome dello stato, il nome della sua capitale e 
+la lingua ufficiale
+
+CREATE OR REPLACE VIEW CapitalCities AS
+    SELECT
+    country.Name,
+    city.Name,
+    countrylanguage.Language
+    FROM country
+    INNER JOIN city ON country.Capital=city.ID
+    INNER JOIN countrylanguage ON countrylanguage.CountryCode=country.Code
+    WHERE countrylanguage.IsOfficial = 'T'

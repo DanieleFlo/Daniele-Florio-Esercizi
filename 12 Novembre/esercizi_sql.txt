@@ -50,6 +50,10 @@ Es 7:
 Si vogliono recuperare dal database "world" la lingua e 
 la nazione di ogni città.
 
-SELECT countrylanguage.Language,country.Name FROM city
+SELECT city.Name,
+countrylanguage.Language,
+country.Name,
+countrylanguage.IsOfficial 
+FROM city
 INNER JOIN countrylanguage ON city.CountryCode = countrylanguage.CountryCode 
 INNER JOIN country ON country.Code = city.CountryCode;

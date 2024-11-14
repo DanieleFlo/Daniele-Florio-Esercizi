@@ -4,6 +4,7 @@
 
 file_path = 'alunni.txt'
 
+# Fa la media di una lista di voti
 def media_voti(voti):
     voti = list(map(int, voti))
     return sum(voti) / len(voti) if len(voti) > 0 else 0
